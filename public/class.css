@@ -4,17 +4,19 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  scroll-behavior: smooth;
 }
 
 body {
-  background: url("hi.jpg") no-repeat center center/cover; /* background image */
+  background: url("hi.jpg") no-repeat center center/cover;
   min-height: 100vh;
-  color: #fff;
+  color: #FFD700;
   text-align: center;
   position: relative;
   overflow-x: hidden;
 }
 
+/* Dark Overlay */
 body::after {
   content: "";
   position: absolute;
@@ -22,221 +24,228 @@ body::after {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.5); /* dark overlay */
+  background: rgba(0,0,0,0.65);
   z-index: 0;
 }
 
-/* ===== Hero Section ===== */
-.hero {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 80vh;
-  padding: 20px;
-  position: relative;
-  z-index: 1;
-  overflow: hidden;
-  border-bottom-left-radius: 50px;
-  border-bottom-right-radius: 50px;
-}
-
-/* Animated Gradient Overlay */
-.hero::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(270deg, #4a90e2, #50e3c2, #ffeb3b, #ff6f61);
-  background-size: 800% 800%;
-  animation: gradientShift 15s ease infinite;
-  opacity: 0.4;
-  z-index: 0;
-  border-bottom-left-radius: 50px;
-  border-bottom-right-radius: 50px;
-}
-
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* Keep text above gradient */
-.hero-header, .hero p {
-  position: relative;
-  z-index: 1;
-}
-
-.hero-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-}
-
-.school-logo {
-  width: 130px;
-  height: 130px;
-  object-fit: contain;
-  border-radius: 50%;
-  border: 3px solid #ffeb3b;
-  box-shadow: 0px 4px 12px rgba(0,0,0,0.7);
-  transition: transform 0.4s ease;
-}
-
-.school-logo:hover {
-  transform: rotate(10deg) scale(1.05);
-}
-
-.hero h1 {
-  font-size: 3rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  color: #ffeb3b;
-  text-shadow: 3px 3px 8px rgba(0,0,0,0.9);
-}
-
-.hero p {
-  font-size: 1.5rem;
-  font-style: italic;
-  margin-top: 15px;
-  color: #fff;
-  text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
-}
-
-/* ===== Navbar ===== */
-nav {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 15px;
+/* ===== Page Header ===== */
+h1 {
   margin: 20px 0;
-  position: relative;
-  z-index: 1;
+  font-size: 2.8rem;
+  color: #FFD700;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.9);
+  animation: fadeInDown 1s ease forwards;
 }
 
-nav a {
+@keyframes fadeInDown {
+  0% { opacity: 0; transform: translateY(-30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== Back Link ===== */
+a {
   text-decoration: none;
-  background: #004080;
-  color: #fff;
-  padding: 12px 25px;
-  border-radius: 30px;
+  color: #FFD700;
   font-weight: bold;
-  transition: all 0.3s ease;
-  box-shadow: 0px 3px 6px rgba(0,0,0,0.4);
+  padding: 8px 18px;
+  border-radius: 25px;
+  border: 2px solid #FFD700;
+  transition: all 0.4s ease;
+  display: inline-block;
+  margin-bottom: 20px;
 }
 
-nav a:hover {
-  background: gold;
-  color: #002147;
-  transform: translateY(-3px);
-  box-shadow: 0px 6px 12px rgba(0,0,0,0.6);
+a:hover {
+  background: #FFD700;
+  color: #000;
+  transform: scale(1.05);
+  box-shadow: 0px 4px 12px rgba(255,215,0,0.5);
 }
 
-/* ===== Section ===== */
+/* ===== Sections ===== */
 section {
-  background: rgba(0,0,0,0.7);
-  padding: 30px 25px;
-  margin: 40px auto;
-  max-width: 500px;
-  border-radius: 15px;
-  box-shadow: 0px 6px 20px rgba(0,0,0,0.8);
+  background: rgba(0,0,0,0.75);
+  padding: 35px 30px;
+  margin: 30px auto;
+  max-width: 650px;
+  border-radius: 20px;
+  box-shadow: 0px 6px 25px rgba(255,215,0,0.5);
   position: relative;
   z-index: 1;
+  animation: fadeInUp 1s ease forwards;
 }
 
 section h2 {
   margin-bottom: 20px;
-  font-size: 1.5rem;
-  color: #ffeb3b;
-  text-shadow: 1px 1px 4px black;
+  font-size: 1.7rem;
+  color: #FFD700;
+  text-shadow: 1px 1px 5px black;
+}
+
+/* ===== Form Inputs ===== */
+input, select {
+  width: 100%;
+  padding: 12px 15px;
+  margin: 10px 0;
+  border-radius: 25px;
+  border: 2px solid #FFD700;
+  background: rgba(0,0,0,0.85);
+  color: #FFD700;
+  font-size: 1rem;
+  transition: 0.3s ease;
+}
+
+input::placeholder {
+  color: #FFD700;
+}
+
+input:focus, select:focus {
+  border-color: #fff;
+  box-shadow: 0 0 10px #FFD700;
+  outline: none;
 }
 
 /* ===== Buttons ===== */
 button {
-  background: #0056b3;
-  color: #fff;
-  padding: 14px 30px;
+  background: #000;
+  color: #FFD700;
+  padding: 14px 28px;
   font-size: 1.1rem;
-  border: none;
-  border-radius: 30px;
+  border: 2px solid #FFD700;
+  border-radius: 35px;
   cursor: pointer;
-  transition: all 0.3s ease;
   font-weight: bold;
-  box-shadow: 0px 4px 10px rgba(0,0,0,0.5);
+  transition: all 0.4s ease;
+  box-shadow: 0 4px 12px rgba(255,215,0,0.4);
 }
 
 button:hover {
-  background: gold;
-  color: #002147;
-  transform: scale(1.05);
-  box-shadow: 0px 6px 14px rgba(0,0,0,0.7);
+  background: #FFD700;
+  color: #000;
+  transform: scale(1.08) rotate(-1deg);
+  box-shadow: 0px 6px 18px rgba(255,215,0,0.8);
 }
 
-/* ===== Message ===== */
-#initMsg {
-  margin-top: 15px;
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #ffeb3b;
-  text-shadow: 1px 1px 3px black;
+/* ===== Students Table ===== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  animation: fadeIn 1.2s ease forwards;
 }
 
-/* ===== Footer ===== */
-footer {
-  background: rgba(0,0,0,0.8);
-  color: #fff;
+th, td {
+  border: 1px solid #FFD700;
+  padding: 10px 8px;
   text-align: center;
-  padding: 15px 10px;
-  font-size: 0.9rem;
-  position: relative;
-  z-index: 1;
-  margin-top: auto;
+  color: #FFD700;
+}
+
+th {
+  background: #000;
+  color: #FFD700;
+}
+
+tr:nth-child(even) {
+  background: rgba(255,215,0,0.1);
+}
+
+/* Hover row highlight */
+tr:hover {
+  background: rgba(255,215,0,0.2);
+  transition: 0.3s ease;
+}
+
+/* ===== Attendance Modal ===== */
+#historyModal > div {
+  background: #000;
+  color: #FFD700;
+  width: 90%;
+  max-width: 600px;
+  margin: 60px auto;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(255,215,0,0.6);
+  animation: scaleIn 0.5s ease forwards;
+}
+
+#historyModal table th, #historyModal table td {
+  border: 1px solid #FFD700;
+  color: #FFD700;
+}
+
+#historyModal button {
+  margin-top: 15px;
+}
+
+/* ===== Messages ===== */
+#loginMsg {
+  color: #FFD700;
+  margin-top: 12px;
+  font-weight: bold;
+}
+
+/* ===== Animations ===== */
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  0% { opacity: 0; transform: scale(0.7); }
+  100% { opacity: 1; transform: scale(1); }
 }
 
 /* ===== Responsive ===== */
 @media (max-width: 1024px) {
-  .hero h1 {
-    font-size: 2.5rem;
-  }
-  .hero p {
-    font-size: 1.3rem;
-  }
   section {
-    margin: 30px 20px;
-    padding: 25px 20px;
+    max-width: 550px;
+    padding: 28px 25px;
   }
 }
 
 @media (max-width: 768px) {
-  .hero h1 {
+  h1 {
     font-size: 2rem;
   }
-  .hero p {
-    font-size: 1.1rem;
+
+  section h2 {
+    font-size: 1.4rem;
   }
-  section {
-    margin: 20px 15px;
-    padding: 20px 15px;
+
+  input, select, button {
+    font-size: 1rem;
   }
-  button {
-    width: 100%;
+
+  table {
+    font-size: 0.85rem;
   }
 }
 
 @media (max-width: 480px) {
-  .hero h1 {
-    font-size: 1.5rem;
+  h1 {
+    font-size: 1.4rem;
   }
-  .hero p {
-    font-size: 1rem;
+
+  section {
+    padding: 20px 15px;
+    margin: 15px 10px;
   }
-  .school-logo {
-    width: 100px;
-    height: 100px;
+
+  section h2 {
+    font-size: 1.2rem;
+  }
+
+  input, select, button {
+    font-size: 0.9rem;
+  }
+
+  table {
+    font-size: 0.8rem;
   }
 }
