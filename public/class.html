@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class Page</title>
+<link rel="stylesheet" href="class.css">
+</head>
+<body>
+<h1>📚 Class Page</h1>
+<a href="home.html">🏠 Back to Home</a>
+
+<!-- Teacher Login Section -->
+<section id="login-section">
+  <h2>Teacher Login</h2>
+  <select id="classSelect"></select>
+  <input type="password" id="classPass" placeholder="Password">
+  <button onclick="loginTeacher()">Login</button>
+  <p id="loginMsg" style="color: red;"></p>
+</section>
+
+<!-- Dashboard after login -->
+<section id="dashboard" style="display:none;">
+  <h2>Manage Students</h2>
+
+  <!-- Add Student Form -->
+  <div id="addStudentForm">
+    <input type="number" id="studentRoll" placeholder="Roll Number">
+    <input type="text" id="studentName" placeholder="Full Name">
+    <input type="text" id="studentPhone" placeholder="Phone Number">
+    <input type="text" id="studentParent" placeholder="Parent/Guardian Name">
+    <input type="text" id="studentAddress" placeholder="Address">
+    <button onclick="addStudent()">Add Student</button>
+  </div>
+
+  <h3>Students</h3>
+  <table border="1" id="studentsTable">
+    <thead>
+      <tr>
+        <th>Roll</th>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Parent</th>
+        <th>Address</th>
+        <th>Attendance %</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</section>
+
+<!-- Attendance History Modal -->
+<div id="historyModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7);">
+  <div style="background:#fff; color:#000; width:80%; max-width:600px; margin:50px auto; padding:20px; border-radius:10px;">
+    <h3 id="historyTitle">Attendance History</h3>
+    <table border="1" width="100%">
+      <thead>
+        <tr><th>Date</th><th>Status</th></tr>
+      </thead>
+      <tbody id="historyBody"></tbody>
+    </table>
+    <button onclick="closeHistory()">Close</button>
+  </div>
+</div>
+
+<script src="class.js"></script>
+</body>
+</html>

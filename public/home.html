@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attendance System - Home</title>
+  <link rel="stylesheet" href="home.css">
+</head>
+<body>
+  <div class="hero">
+    <div class="hero-header">
+      <!-- Logo placeholder -->
+      <img src="hii.jpg" alt="School Logo" class="school-logo">
+      <h1>VISION - The School of Excellence</h1>
+    </div>
+    <p>"A new era of education awaits"</p>
+  </div>
+
+  <nav>
+    <a href="class.html">Class Page</a>
+    <a href="passwordmanager.html">Password Manager</a>
+  </nav>
+
+  <section>
+    <h2>Initialize Classes (Nursery → 10th)</h2>
+    <button id="initClassesBtn">Initialize Classes</button>
+    <p id="initMsg"></p>
+  </section>
+
+  <script>
+    document.getElementById("initClassesBtn").addEventListener("click", async () => {
+      try {
+        const res = await fetch("/api/init-classes", { method: "POST" });
+        const data = await res.json();
+        document.getElementById("initMsg").textContent = data.message;
+      } catch (err) {
+        console.error(err);
+        document.getElementById("initMsg").textContent = "Error initializing classes. Check server!";
+      }
+    });
+  </script>
+</body>
+</html>
