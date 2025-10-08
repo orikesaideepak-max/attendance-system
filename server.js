@@ -12,12 +12,9 @@ app.use(express.static("public"));
 // ===== MongoDB Atlas Connection =====
 const mongoURI = "mongodb+srv://orikesaideepak_db_user:9154391829@cluster0.osh906u.mongodb.net/attendanceDB?retryWrites=true&w=majority";
 
-mongoose.connect(mongoURI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-.then(() => console.log("✅ Connected to MongoDB Atlas"))
-.catch(err => console.error("❌ MongoDB Atlas connection error:", err));
+mongoose.connect(mongoURI)
+  .then(() => console.log("✅ Connected to MongoDB Atlas"))
+  .catch(err => console.error("❌ MongoDB Atlas connection error:", err));
 
 // ===== Schemas =====
 const AttendanceSchema = new mongoose.Schema({
@@ -46,9 +43,8 @@ const ClassModel = mongoose.model("Class", ClassSchema);
 
 // Serve home.html at root
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/public/home.html");
+  res.sendFile(path.join(__dirname, "public/home.html"));
 });
-
 
 // ===== Initialize classes =====
 app.post("/api/init-classes", async (req, res) => {
@@ -74,13 +70,15 @@ app.post("/api/init-classes", async (req, res) => {
   }
 });
 
-// ===== Get all classes =====
+// ===== Get all classes (always return array) =====
 app.get("/api/classes", async (req, res) => {
   try {
     const classes = await ClassModel.find();
     const classOrder = ["Nursery","LKG","UKG","1st","2nd","3rd","4th","5th","6th","7th","8th","9th","10th"];
     classes.sort((a, b) => classOrder.indexOf(a.name) - classOrder.indexOf(b.name));
-    res.json(classes);
+
+    // Always return array
+    res.json(classes || []);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Failed to fetch classes" });

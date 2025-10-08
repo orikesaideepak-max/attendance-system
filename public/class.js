@@ -4,9 +4,20 @@ let currentClass = null;
 async function loadClassOptions() {
   try {
     const res = await fetch("/api/classes");
-    const classes = await res.json();
+    const data = await res.json();
+
+    // Ensure we always have an array
+    const classes = Array.isArray(data) ? data : data.classes || [];
+    
     const select = document.getElementById("classSelect");
     select.innerHTML = "";
+
+    if (classes.length === 0) {
+      select.innerHTML = `<option disabled>No classes found</option>`;
+      console.warn("No classes returned from API.");
+      return;
+    }
+
     classes.forEach((c) => {
       const opt = document.createElement("option");
       opt.value = c.name;
@@ -15,6 +26,8 @@ async function loadClassOptions() {
     });
   } catch (err) {
     console.error("Failed to load classes", err);
+    const select = document.getElementById("classSelect");
+    select.innerHTML = `<option disabled>Error loading classes</option>`;
   }
 }
 loadClassOptions();
@@ -54,6 +67,8 @@ function renderStudents() {
   const tbody = document.querySelector("#studentsTable tbody");
   tbody.innerHTML = "";
   const todayStr = formatDate(new Date());
+
+  if (!currentClass?.students) return;
 
   currentClass.students.forEach((s) => {
     const totalDays = s.attendance ? s.attendance.length : 0;
@@ -103,8 +118,7 @@ async function addStudent() {
     return alert("Roll Number, Name, and Phone are required!");
   }
 
-  // Ensure +91 prefix
-  phone = phone.replace(/\D/g, ""); // remove non-digit chars
+  phone = phone.replace(/\D/g, "");
   if (!phone.startsWith("91")) phone = "91" + phone;
 
   try {
@@ -151,7 +165,7 @@ async function markAttendance(roll, status) {
   }
 }
 
-// ===== Edit attendance - show P / A buttons =====
+// ===== Edit attendance =====
 function editAttendance(roll, btn) {
   const td = btn.parentElement;
   td.innerHTML = `
@@ -160,12 +174,10 @@ function editAttendance(roll, btn) {
   `;
 }
 
-// ===== Update attendance today =====
+// ===== Update attendance =====
 async function updateAttendance(roll, status) {
   try {
     const student = currentClass.students.find((s) => s.rollNumber === roll);
-    const todayStr = formatDate(new Date());
-
     const res = await fetch(`/api/classes/${currentClass.name}/edit-attendance`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -174,13 +186,13 @@ async function updateAttendance(roll, status) {
     currentClass = await res.json();
     renderStudents();
 
-    if (status === "Absent") sendAbsentWhatsApp(student, todayStr);
+    if (status === "Absent") sendAbsentWhatsApp(student, formatDate(new Date()));
   } catch (err) {
     console.error("Failed to update attendance", err);
   }
 }
 
-// ===== Send official Absent WhatsApp message =====
+// ===== WhatsApp message for absence =====
 function sendAbsentWhatsApp(student, date) {
   const message = `Dear Parent,
 
@@ -189,7 +201,6 @@ This is to inform you that your child ${student.name} (Roll No: ${student.rollNu
 Regards,
 Vision School`;
 
-  // Ensure +91 country code
   let phone = student.phone.replace(/\D/g, "");
   if (!phone.startsWith("91")) phone = "91" + phone;
 
