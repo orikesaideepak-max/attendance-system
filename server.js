@@ -39,7 +39,8 @@ const ClassSchema = new mongoose.Schema({
   students: [StudentSchema],
 });
 
-const ClassModel = mongoose.model("Class", ClassSchema);
+// Use explicit collection name to match MongoDB Atlas collection
+const ClassModel = mongoose.model("Class", ClassSchema, "classes");
 
 // Serve home.html at root
 app.get("/", (req, res) => {
@@ -70,14 +71,14 @@ app.post("/api/init-classes", async (req, res) => {
   }
 });
 
-// ===== Get all classes (always return array) =====
+// ===== Get all classes =====
 app.get("/api/classes", async (req, res) => {
   try {
     const classes = await ClassModel.find();
     const classOrder = ["Nursery","LKG","UKG","1st","2nd","3rd","4th","5th","6th","7th","8th","9th","10th"];
     classes.sort((a, b) => classOrder.indexOf(a.name) - classOrder.indexOf(b.name));
 
-    // Always return array
+    console.log("Classes fetched:", classes.map(c => c.name));
     res.json(classes || []);
   } catch (err) {
     console.error(err);
