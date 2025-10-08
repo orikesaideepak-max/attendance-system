@@ -7,11 +7,11 @@
 }
 
 body {
-  background: url("hi.jpg") no-repeat center center/cover; /* keep image in same folder */
+  background: url("hi.jpg") no-repeat center center/cover;
   min-height: 100vh;
-  color: #fff;
+  color: #FFD700; /* Gold text */
   text-align: center;
-  backdrop-filter: brightness(0.6);
+  background-color: #000; /* fallback */
 }
 
 /* ===== Hero Section ===== */
@@ -20,15 +20,18 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.6); /* dark overlay */
+  height: 80vh;
+  background: rgba(0, 0, 0, 0.7);
   padding: 20px;
 }
 
 .hero-header {
   display: flex;
+  flex-direction: row;
   align-items: center;
-  gap: 20px; /* space between logo and name */
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 /* School Logo */
@@ -37,7 +40,7 @@ body {
   height: 120px;
   object-fit: contain;
   border-radius: 50%;
-  border: 3px solid #ffeb3b;
+  border: 3px solid #FFD700;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.7);
   transition: transform 0.4s ease;
 }
@@ -47,19 +50,19 @@ body {
 }
 
 .hero h1 {
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: bold;
   text-transform: uppercase;
-  letter-spacing: 4px;
-  color: #ffeb3b;
+  letter-spacing: 2px;
+  color: #FFD700;
   text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.9);
 }
 
 .hero p {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-style: italic;
   margin-top: 15px;
-  color: #fff;
+  color: #FFD700;
   text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
 }
 
@@ -70,59 +73,59 @@ nav {
 
 nav a {
   text-decoration: none;
-  background: #004080;
-  color: #fff;
-  padding: 12px 25px;
+  background: #000;
+  color: #FFD700;
+  padding: 12px 20px;
   margin: 5px;
   border-radius: 30px;
   font-weight: bold;
   transition: all 0.3s ease;
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.4);
+  border: 2px solid #FFD700;
+  display: inline-block;
 }
 
 nav a:hover {
-  background: gold;
-  color: #002147;
+  background: #FFD700;
+  color: #000;
   transform: translateY(-3px);
-  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.6);
+  box-shadow: 0px 6px 12px rgba(255, 215, 0, 0.6);
 }
 
 /* ===== Section ===== */
 section {
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.7);
   padding: 25px;
   margin: 40px auto;
   max-width: 500px;
   border-radius: 15px;
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 4px 15px rgba(255, 215, 0, 0.5);
 }
 
 section h2 {
   margin-bottom: 15px;
   font-size: 1.4rem;
-  color: #ffeb3b;
+  color: #FFD700;
   text-shadow: 1px 1px 4px black;
 }
 
 /* ===== Buttons ===== */
 button {
-  background: #0056b3;
-  color: #fff;
+  background: #000;
+  color: #FFD700;
   padding: 12px 25px;
   font-size: 1rem;
-  border: none;
+  border: 2px solid #FFD700;
   border-radius: 30px;
   cursor: pointer;
   transition: all 0.3s ease;
   font-weight: bold;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 button:hover {
-  background: gold;
-  color: #002147;
+  background: #FFD700;
+  color: #000;
   transform: scale(1.05);
-  box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 6px 14px rgba(255, 215, 0, 0.7);
 }
 
 /* ===== Message ===== */
@@ -130,6 +133,50 @@ button:hover {
   margin-top: 15px;
   font-size: 1.1rem;
   font-weight: bold;
-  color: #ffeb3b;
+  color: #FFD700;
   text-shadow: 1px 1px 3px black;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .hero-header {
+    flex-direction: column;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  nav a {
+    padding: 10px 15px;
+    font-size: 0.95rem;
+  }
+
+  section {
+    padding: 15px;
+    margin: 20px 10px;
+  }
+
+  button {
+    padding: 10px 20px;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 1.6rem;
+  }
+
+  .hero p {
+    font-size: 0.9rem;
+  }
+
+  button, nav a {
+    width: 90%;
+  }
 }
