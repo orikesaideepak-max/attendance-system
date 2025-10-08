@@ -30,7 +30,9 @@ async function loadClassOptions() {
     select.innerHTML = `<option disabled>Error loading classes</option>`;
   }
 }
-loadClassOptions();
+
+// Call after DOM is loaded
+document.addEventListener("DOMContentLoaded", loadClassOptions);
 
 // ===== Teacher login =====
 async function loginTeacher() {
